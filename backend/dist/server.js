@@ -8,12 +8,17 @@ const dotenv_1 = require("dotenv");
 const express_1 = __importDefault(require("express"));
 const dbConfig_1 = __importDefault(require("./config/dbConfig"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const user_1 = __importDefault(require("./routes/user"));
+const products_1 = __importDefault(require("./routes/products"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const verifyToken_1 = __importDefault(require("./middleware/verifyToken"));
 const app = (0, express_1.default)();
 const port = process.env.PORT;
 (0, dbConfig_1.default)();
-app.get("/", (req, res) => {
-    res.send("<h1>Hello</h1>");
-});
+app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
+app.use("/user", user_1.default);
+app.use("/product", verifyToken_1.default, products_1.default);
 app.listen(port, () => {
     return console.log(`server is running on port ${port}`);
 });
