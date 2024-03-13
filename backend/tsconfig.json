@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
   },
   "include":[
     "src"
