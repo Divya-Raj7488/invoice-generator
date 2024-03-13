@@ -6,14 +6,24 @@ function App() {
   function handleNavigate (){
     navigate('/login')
   }
+  function navigateToRegisterPage () {
+    navigate('/register')
+  }
   return (
-    <div className="w-screen h-screen flex items-center justify-center text-black">
+    <div className="w-screen h-screen flex items-center flex-col justify-center text-black gap-3">
       <button
         type="submit"
         className="w-36 h-12 border-white border-2 text-md font-medium rounded-xl Btn"
         onClick={handleNavigate}
       >
-        Go to login page
+       sign In
+      </button>
+      <button
+        type="submit"
+        className="w-36 h-12 border-white border-2 text-md font-medium rounded-xl Btn"
+        onClick={navigateToRegisterPage}
+      >
+        Sign Up
       </button>
     </div>
   );

@@ -5,6 +5,7 @@ import "./styles/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginForm from "./components/login.tsx";
 import AddProduct from "./components/products.tsx";
+import RegisterForm from "./components/register.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path:"add-product",
     element:<AddProduct/>
+  },
+  {
+    path:'/register',
+    element:<RegisterForm />
   }
 ]);
 
