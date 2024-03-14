@@ -13,6 +13,7 @@ const verifyToken = (req, res, next) => {
             const token = header.split("=")[1];
             const decodedToken = jsonwebtoken_1.default.verify(token, process.env.LOGIN_SECRET_TOKEN);
             req.user = decodedToken;
+            console.log(decodedToken);
             next();
         }
         catch (error) {

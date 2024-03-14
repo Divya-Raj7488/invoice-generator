@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 interface user {
-  _id: string;
+  id: string;
   email: string;
 }
 
@@ -14,6 +14,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
       const token = header.split("=")[1];
       const decodedToken = jwt.verify(token, process.env.LOGIN_SECRET_TOKEN);
       req.user = decodedToken as user;
+      console.log(decodedToken)
       next();
     } catch (error) {
       res.status(401).json({ message: "Unauthorized" });
