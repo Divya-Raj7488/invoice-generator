@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 interface Product {
@@ -13,6 +14,7 @@ const AddProduct: React.FC = () => {
   const [productQuantity, setProductQuantity] = useState("");
   const [productRate, setProductRate] = useState("");
   const [DataColleted, setDataCollected] = useState<Product[]>([]);
+  const [isPdfGenerated, setIsPdfGenerated] = useState(false);
 
   const addMore = () => {
     const newProduct: Product = {
@@ -27,7 +29,7 @@ const AddProduct: React.FC = () => {
     setProductQuantity("");
     setProductRate("");
   };
-  const generateInvoice = () => {
+  const generateInvoice = async () => {
     const newProduct: Product = {
       productName: productName,
       productQuantity: productQuantity,
@@ -36,7 +38,21 @@ const AddProduct: React.FC = () => {
       totalWithGST: parseInt(productRate) * parseInt(productQuantity) * 1.18,
     };
     setDataCollected((prev: Product[]) => [...prev, newProduct]);
-    //post request using axios
+    try {
+      // console.log(DataColleted)
+      const response = await axios({
+        method: "POST",
+        data: newProduct,
+        url: "http://localhost:3000/create-product",
+        withCredentials: true,
+      });
+      if (response) {
+        // extract pdf from response and show it.
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -81,6 +97,14 @@ const AddProduct: React.FC = () => {
           {/* {DataColleted.length > 0 && DataColleted.map(() =>{})} */}
         </div>
       </div>
+      {isPdfGenerated === true && (
+        <div className="w-80 h-96 flex flex-col justify-center items-center rounded-3xl gap-3 loginForm">
+          {/* show generated pdf here */}
+          <div></div>
+
+        </div>
+      )}
+
       {/* <h1>hello</h1> */}
     </div>
   );
