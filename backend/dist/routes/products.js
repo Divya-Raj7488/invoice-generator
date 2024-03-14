@@ -7,6 +7,6 @@ const express_1 = __importDefault(require("express"));
 const products_1 = __importDefault(require("../controller/products"));
 const verifyToken_1 = __importDefault(require("../middleware/verifyToken"));
 const router = express_1.default.Router();
-router.route("/").get(verifyToken_1.default, products_1.default);
+router.route("/").post(verifyToken_1.default, products_1.default);
 exports.default = router;
 //# sourceMappingURL=products.js.map

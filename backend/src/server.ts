@@ -18,7 +18,7 @@ app.use(cors(corsOptions))
 app.use(express.json());
 app.use(cookieParser());
 app.use("/user", userRouter);
-app.use("/product", verifyToken, productRouter);
+app.use("/create-product", productRouter);
 
 app.listen(port, () => {
   return console.log(`server is running on port ${port}`);
